@@ -22,7 +22,7 @@ const FilmTemplate = ({
         <Typography.H1 charCount={10} loading={isFallback}>
           {data?.title}
         </Typography.H1>
-        <Typography.body charCount={500} loading={isFallback}>
+        <Typography.body charCount={10} loading={isFallback}>
           {data?.opening_crawl}
         </Typography.body>
         <Stack $gap={1} $direction="column">

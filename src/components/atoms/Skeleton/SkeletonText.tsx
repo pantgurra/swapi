@@ -49,15 +49,8 @@ const SkeletonText = ({
     return () => window.removeEventListener("resize", calculateLines);
   }, [charCount, lineHeight, calculateLines]);
 
-  const reservedHeight =
-    lineHeightPx * (lines.length || 2) +
-    parseFloat(lineMargin) * ((lines.length || 2) - 1);
-
   return (
-    <div
-      ref={containerRef}
-      style={{ lineHeight: `${lineHeight}`, minHeight: reservedHeight }}
-    >
+    <div ref={containerRef} style={{ lineHeight: `${lineHeight}` }}>
       {lines.map((charsInLine, idx) => (
         <SkeletonLine
           key={idx}
