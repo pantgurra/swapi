@@ -2,13 +2,13 @@
 
 A React + TypeScript application displaying Star Wars data using SWR, and styled-components.  
 
-## Setup master branch
+## Prerequisites
+create .env file in root and copy variable keys from .env.example. This time it's really not a secret.
 ```bash
-npm install
-npm run dev
+VITE_BASE_URL = 'https://ci-swapi.herokuapp.com/api/'
 ```
-## Proxy branch (batced requests)
-There is a complementary branch named proxy with a small express proxy server to handle batched requests by using useBatchSWR hook from ui.
+
+## Proxy branch
 
 ```bash
 npm install
