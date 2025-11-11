@@ -1,9 +1,8 @@
-import fetcher from "@/services/fetcher";
-import useSWR from "swr/immutable";
+import useBatchSWR from "./useBatchSWR";
 
 const useResource = <T>(resource: string | null) => {
-  const { data } = useSWR(resource, fetcher<T>, { suspense: true });
-  return { data };
+  const { data, isLoading } = useBatchSWR<T>(resource);
+  return { data, isLoading };
 };
 
 export default useResource;

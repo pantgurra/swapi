@@ -4,8 +4,6 @@ import {
   AccordionDetails,
   AccordionSummary,
 } from "@/components/molecules";
-import useAccordionGroup from "@/components/molecules/Accordion/hooks";
-import { useInfiniteScroll } from "@/hooks";
 import { Suspense } from "react";
 import Resource from "./Resource";
 
@@ -20,12 +18,6 @@ const ResourceAccordion = <T,>({
   resourceKey: keyof T;
   loading: boolean;
 }) => {
-  const { expanded } = useAccordionGroup();
-  const isOpen = expanded.includes(title);
-  const { visibleCount, loadMoreRef } = useInfiniteScroll(data, {
-    increment: 2,
-    enabled: isOpen,
-  });
 
   if (loading) {
     return (
@@ -43,7 +35,7 @@ const ResourceAccordion = <T,>({
         </AccordionSummary>
         <AccordionDetails>
           <List>
-            {data.slice(0, visibleCount).map((resource) => (
+            {data.map((resource) => (
               <Suspense
                 fallback={
                   <ListItem>
@@ -62,7 +54,6 @@ const ResourceAccordion = <T,>({
                 </ListItem>
               </Suspense>
             ))}
-            {isOpen && <div ref={loadMoreRef} />}
           </List>
         </AccordionDetails>
       </Accordion>

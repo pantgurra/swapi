@@ -8,7 +8,7 @@ const FilmDataProvider = () => {
   const { id } = useParams();
   const { addCharacter } = useCharacters();
 
-  const { data } = useResource<Film>(
+  const { data, isLoading } = useResource<Film>(
     `${import.meta.env.VITE_BASE_URL}films/${id}/`
   );
 
@@ -18,7 +18,7 @@ const FilmDataProvider = () => {
     }
   }, [data, addCharacter]);
 
-  return <FilmTemplate data={data} />;
+  return <FilmTemplate data={data} isFallback={isLoading} />;
 };
 
 export default FilmDataProvider;

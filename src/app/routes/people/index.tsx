@@ -1,27 +1,26 @@
 import { Link, List, ListItem, Typography } from "@/components/atoms";
-import { useCharacters, useInfiniteScroll, useResource } from "@/hooks";
+import { useCharacters, useResource } from "@/hooks";
 import { getIdFromUrl } from "@/lib";
 import type { People } from "@/types";
 import { Suspense } from "react";
 
 const Character = ({ resource }: { resource: string }) => {
-  const { data } = useResource<People>(resource);
+  const { data, isLoading } = useResource<People>(resource);
   return (
     <Link variant="button" to={`/people/${getIdFromUrl(data?.url || "")}`}>
-      <Typography.button>{data?.name}</Typography.button>
+      <Typography.button loading={isLoading}>{data?.name}</Typography.button>
     </Link>
   );
 };
 
 const Characters = () => {
   const { data } = useCharacters();
-  const { visibleCount, loadMoreRef } = useInfiniteScroll(data);
 
   return (
     <>
       <Typography.H1>Characters</Typography.H1>
       <List>
-        {data?.slice(0, visibleCount).map((resource) => (
+        {data?.map((resource) => (
           <Suspense
             key={resource}
             fallback={
@@ -35,9 +34,6 @@ const Characters = () => {
             </ListItem>
           </Suspense>
         ))}
-        <ListItem>
-          <div ref={loadMoreRef} />
-        </ListItem>
       </List>
     </>
   );
